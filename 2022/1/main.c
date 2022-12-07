@@ -26,13 +26,13 @@ int main() {
 
     //seek to the beginning of the file
     fseek(filePointer, 0, SEEK_SET);
-    int index = 0;
-    int largest = 0;
 
     //use the same newline detection hack
     //sum to current index until newline
     //when newline compare to the largest found
     //then increase index to do the next elf
+    int index = 0;
+    int largest = 0;
     while(fgets(test, 10, filePointer) != NULL) {
         if((int)strlen(test) != 1) {
             elvesArray[index] += atoi(test);
@@ -51,6 +51,8 @@ int main() {
     qsort(elvesArray, numberOfElves, sizeof(elvesArray[0]), cmpfunc);
     //add up the top three
     printf("Top three total: %d\n", elvesArray[0] + elvesArray[1] + elvesArray[2]);
+    //don't forgot to let the memory free :)
+    free(elvesArray);
     fclose(filePointer);
     return 0;
 }
